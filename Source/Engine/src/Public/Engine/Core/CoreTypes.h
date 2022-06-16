@@ -1,17 +1,17 @@
 ﻿#pragma once
 
-typedef const char i8;
-typedef const short i16;
-typedef const int i32;
-typedef const long long i64;
+typedef char i8;
+typedef short i16;
+typedef int i32;
+typedef long long i64;
 
-typedef const unsigned char u8;
-typedef const unsigned short u16;
-typedef const unsigned int u32;
-typedef const unsigned long long u64;
+typedef unsigned char u8;
+typedef unsigned short u16;
+typedef unsigned int u32;
+typedef unsigned long long u64;
 
-typedef const float f32;
-typedef const double f64;
+typedef float f32;
+typedef double f64;
 
 static_assert(sizeof(i8) == 1, "i8 is not 1 byte");
 static_assert(sizeof(i16) == 2, "i16 is not 2 bytes");

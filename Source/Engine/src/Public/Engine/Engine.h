@@ -1,7 +1,11 @@
 ﻿#pragma once
 
-#include <memory>
 #include <Engine/Core/CoreDefinitions.h>
+#include <Engine/Core/StatusCodes.h>
+
+#include <memory>
+
+#include "Application/Application.h"
 
 struct ENGINE_API FEngineSpecification
 {
@@ -14,17 +18,18 @@ public:
     FEngine() = default;
     ~FEngine() = default;
 
-    void Start(FEngineSpecification specification);
+    FStatusCode Start(FEngineSpecification specification, std::shared_ptr<FApplication> application);
 
     [[nodiscard]] FEngineSpecification GetEngineSpecification() const { return m_EngineSpecification; }
 
 private:
-    void Initialize();
+    FStatusCode Initialize() const;
     void Run();
-    void Shutdown();
+    [[nodiscard]] FStatusCode Shutdown() const;
     
 private:
     FEngineSpecification m_EngineSpecification{};
+    std::shared_ptr<FApplication> m_Application = nullptr;
     
 };
 

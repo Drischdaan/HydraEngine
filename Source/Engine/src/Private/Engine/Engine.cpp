@@ -2,22 +2,37 @@
 
 #include <Engine/Engine.h>
 
-void FEngine::Start(FEngineSpecification specification)
+#include <utility>
+
+FStatusCode FEngine::Start(FEngineSpecification specification, std::shared_ptr<FApplication> application)
 {
     m_EngineSpecification = specification;
-    Initialize();
+    m_Application = std::move(application);
+    if(IS_FAILURE_CODE(Initialize()))
+        return Shutdown();
     Run();
-    Shutdown();
+    return Shutdown();
 }
 
-void FEngine::Initialize()
+FStatusCode FEngine::Initialize() const
 {
+    FStatusCode applicationStatus = m_Application->Initialize();
+    if(IS_FAILURE_CODE(applicationStatus))
+        return applicationStatus;
+    return StatusCode::Ok;
 }
 
 void FEngine::Run()
 {
 }
 
-void FEngine::Shutdown()
+FStatusCode FEngine::Shutdown() const
 {
+    if(m_Application != nullptr)
+    {
+        FStatusCode applicationStatus = m_Application->Shutdown();
+        if(IS_FAILURE_CODE(applicationStatus))
+            return applicationStatus;
+    }
+    return StatusCode::Ok;
 }
