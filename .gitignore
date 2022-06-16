@@ -1,0 +1,14 @@
+**/bin/
+bin-int/
+build/
+*.log
+.idea/
+
+imgui.ini
+
+# Visual Studio files and folder
+.vs/
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
