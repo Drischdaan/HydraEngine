@@ -24,8 +24,8 @@ public:
 
 private:
     [[nodiscard]] FStatusCode Initialize() const;
-    void Run();
-    [[nodiscard]] FStatusCode Shutdown() const;
+    void Run() const;
+    [[nodiscard]] FStatusCode Shutdown(FStatusCode code) const;
     
 private:
     FEngineSpecification m_EngineSpecification{};

@@ -8,10 +8,11 @@ FStatusCode FEngine::Start(FEngineSpecification specification, std::shared_ptr<F
 {
     m_EngineSpecification = specification;
     m_Application = std::move(application);
-    if(IS_FAILURE_CODE(Initialize()))
-        return Shutdown();
+    const FStatusCode initializationCode = Initialize();
+    if(IS_FAILURE_CODE(initializationCode))
+        return Shutdown(initializationCode);
     Run();
-    return Shutdown();
+    return Shutdown(initializationCode);
 }
 
 FStatusCode FEngine::Initialize() const
@@ -21,16 +22,16 @@ FStatusCode FEngine::Initialize() const
     return StatusCode::Ok;
 }
 
-void FEngine::Run()
+void FEngine::Run() const
 {
 }
 
-FStatusCode FEngine::Shutdown() const
+FStatusCode FEngine::Shutdown(FStatusCode code) const
 {
     if(m_Application != nullptr)
     {
         FStatusCode applicationStatus = m_Application->Shutdown();
         RETURN_IF_FAILED(applicationStatus)
     }
-    return StatusCode::Ok;
+    return code;
 }

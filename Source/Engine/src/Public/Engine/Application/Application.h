@@ -25,7 +25,7 @@ public:
 
     [[nodiscard]] FApplicationSpecification GetApplicationSpecification() const { return m_ApplicationSpecification; }
 
-private:
+protected:
     FApplicationSpecification m_ApplicationSpecification;
     
 };
