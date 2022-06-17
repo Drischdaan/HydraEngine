@@ -1,9 +1,9 @@
-project "Hydra"
-  location "%{wks.location}/Source/Engine"
-  kind "StaticLib"
-  language "C++"
-  cppdialect "C++20"
-  staticruntime "on"
+project 'Hydra'
+  location '%{wks.location}/Source/Engine'
+  kind 'StaticLib'
+  language 'C++'
+  cppdialect 'C++20'
+  staticruntime 'on'
 
   targetdir(build_directory)
   objdir(int_build_directory)
@@ -24,6 +24,7 @@ project "Hydra"
     '%{prj.location}/src/Private',
     '%{prj.location}/src/Public',
     '%{VULKAN_SDK}/Include',
+    '%{wks.location}/Source/ThirdParty/spdlog/include',
   }
 
   libdirs {
@@ -32,6 +33,7 @@ project "Hydra"
 
   links {
     'vulkan-1.lib',
+    'spdlog',
   }
 
   defines {

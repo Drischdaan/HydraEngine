@@ -7,9 +7,7 @@ struct ENGINE_API FApplicationSpecification
 {
     std::string Name = "Unnamed";
     std::string Author = "Unnamed";
-    i8 MajorVersion = 0;
-    i8 MinorVersion = 0;
-    i8 PatchVersion = 0;
+    u32 Version = VERSION(0, 0, 0);
     std::string VersionSuffix = "dev";
 };
 
@@ -25,7 +23,7 @@ public:
 
     [[nodiscard]] FApplicationSpecification GetApplicationSpecification() const { return m_ApplicationSpecification; }
 
-private:
+protected:
     FApplicationSpecification m_ApplicationSpecification;
     
 };

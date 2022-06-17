@@ -23,14 +23,17 @@ public:
     [[nodiscard]] FEngineSpecification GetEngineSpecification() const { return m_EngineSpecification; }
 
 private:
-    FStatusCode Initialize() const;
-    void Run();
-    [[nodiscard]] FStatusCode Shutdown() const;
+    [[nodiscard]] FStatusCode Initialize() const;
+    void Run() const;
+    [[nodiscard]] FStatusCode Shutdown(FStatusCode code) const;
     
 private:
     FEngineSpecification m_EngineSpecification{};
     std::shared_ptr<FApplication> m_Application = nullptr;
     
 };
+
+#define ENGINE_VERSION VERSION(0, 1, 0)
+#define ENGINE_VERSION_SUFFIX "alpha"
 
 static std::shared_ptr<FEngine> GEngine = std::make_shared<FEngine>();

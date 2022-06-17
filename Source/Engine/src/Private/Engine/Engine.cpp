@@ -1,38 +1,54 @@
 ﻿#include "pch.h"
 
+#include <iostream>
 #include <Engine/Engine.h>
 
 #include <utility>
+
+#include "Engine/Logging/LogManager.h"
 
 FStatusCode FEngine::Start(FEngineSpecification specification, std::shared_ptr<FApplication> application)
 {
     m_EngineSpecification = specification;
     m_Application = std::move(application);
-    if(IS_FAILURE_CODE(Initialize()))
-        return Shutdown();
+    const FStatusCode initializationCode = Initialize();
+    if(IS_FAILURE_CODE(initializationCode))
+        return Shutdown(initializationCode);
     Run();
-    return Shutdown();
+    return Shutdown(initializationCode);
 }
 
 FStatusCode FEngine::Initialize() const
 {
+    FLogManager::Initialize();
+    LOG_INFO("Hydra Engine {}", VERSION_STRING(ENGINE_VERSION, std::string(ENGINE_VERSION_SUFFIX)));
+    LOG_DEBUG("Loading application...");
     FStatusCode applicationStatus = m_Application->Initialize();
-    if(IS_FAILURE_CODE(applicationStatus))
-        return applicationStatus;
+    RETURN_IF_FAILED(applicationStatus)
+    
+    const FApplicationSpecification applicationSpecification = m_Application->GetApplicationSpecification();
+    LOG_INFO("Application initialized:");
+    LOG_INFO("\tName: " + applicationSpecification.Name);
+    LOG_INFO("\tAuthor: " + applicationSpecification.Author);
+    LOG_INFO("\tVersion: " + VERSION_STRING(applicationSpecification.Version, applicationSpecification.VersionSuffix));
     return StatusCode::Ok;
 }
 
-void FEngine::Run()
+void FEngine::Run() const
 {
 }
 
-FStatusCode FEngine::Shutdown() const
+FStatusCode FEngine::Shutdown(FStatusCode code) const
 {
     if(m_Application != nullptr)
     {
         FStatusCode applicationStatus = m_Application->Shutdown();
-        if(IS_FAILURE_CODE(applicationStatus))
-            return applicationStatus;
+        RETURN_IF_FAILED(applicationStatus)
     }
-    return StatusCode::Ok;
+    FLogManager::Shutdown();
+#ifdef _DEBUG
+    printf("Press [ENTER] to exit...");
+    std::cin.get();
+#endif
+    return code;
 }
