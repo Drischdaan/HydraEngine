@@ -8,6 +8,7 @@ group 'Core'
   include 'projects/hydra.lua'
   
 group 'ThirdParty'
+  include 'projects/spdlog.lua'
 
 group 'Examples'
   include 'projects/sandbox.lua'

@@ -1,9 +1,9 @@
-project "Sandbox"
-  location "%{wks.location}/Source/Examples/%{prj.name}"
-  kind "ConsoleApp"
-  language "C++"
-  cppdialect "C++20"
-  staticruntime "on"
+project 'Sandbox'
+  location '%{wks.location}/Source/Examples/%{prj.name}'
+  kind 'ConsoleApp'
+  language 'C++'
+  cppdialect 'C++20'
+  staticruntime 'on'
 
   targetdir(build_directory)
   objdir(int_build_directory)

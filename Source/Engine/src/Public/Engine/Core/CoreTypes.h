@@ -1,5 +1,7 @@
 ﻿#pragma once
 
+#include <string>
+
 typedef char i8;
 typedef short i16;
 typedef int i32;
@@ -55,3 +57,10 @@ static_assert(sizeof(f64) == 8, "f64 is not 8 bytes");
 #define VERSION_MAJOR(version) ((u32)((version) >> 22))
 #define VERSION_MINOR(version) ((u32)((version) >> 12) & 0x3ff)
 #define VERSION_PATCH(version) ((u32)(version) & 0xfff)
+
+#define VERSION_STRING(version, suffix) \
+    ("v" \
+    + std::to_string(VERSION_MAJOR(version)) \
+    + "." + std::to_string(VERSION_MINOR(version)) \
+    + "." + std::to_string(VERSION_PATCH(version)) \
+    + (!(suffix).empty() ? "-" + (suffix) : ""))

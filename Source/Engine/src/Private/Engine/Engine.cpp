@@ -1,8 +1,11 @@
 ﻿#include "pch.h"
 
+#include <iostream>
 #include <Engine/Engine.h>
 
 #include <utility>
+
+#include "Engine/Logging/LogManager.h"
 
 FStatusCode FEngine::Start(FEngineSpecification specification, std::shared_ptr<FApplication> application)
 {
@@ -17,8 +20,17 @@ FStatusCode FEngine::Start(FEngineSpecification specification, std::shared_ptr<F
 
 FStatusCode FEngine::Initialize() const
 {
+    FLogManager::Initialize();
+    LOG_INFO("Hydra Engine {}", VERSION_STRING(ENGINE_VERSION, std::string(ENGINE_VERSION_SUFFIX)));
+    LOG_DEBUG("Loading application...");
     FStatusCode applicationStatus = m_Application->Initialize();
     RETURN_IF_FAILED(applicationStatus)
+    
+    const FApplicationSpecification applicationSpecification = m_Application->GetApplicationSpecification();
+    LOG_INFO("Application initialized:");
+    LOG_INFO("\tName: " + applicationSpecification.Name);
+    LOG_INFO("\tAuthor: " + applicationSpecification.Author);
+    LOG_INFO("\tVersion: " + VERSION_STRING(applicationSpecification.Version, applicationSpecification.VersionSuffix));
     return StatusCode::Ok;
 }
 
@@ -33,5 +45,10 @@ FStatusCode FEngine::Shutdown(FStatusCode code) const
         FStatusCode applicationStatus = m_Application->Shutdown();
         RETURN_IF_FAILED(applicationStatus)
     }
+    FLogManager::Shutdown();
+#ifdef _DEBUG
+    printf("Press [ENTER] to exit...");
+    std::cin.get();
+#endif
     return code;
 }
