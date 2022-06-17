@@ -21,6 +21,7 @@ struct ENGINE_API FStatusCode
 
 #define IS_SUCCESS_CODE(code) ((code).Code >= 0)
 #define IS_FAILURE_CODE(code) ((code).Code < 0)
+#define RETURN_IF_FAILED(code) if (!IS_SUCCESS_CODE(code)) return code;
 
 namespace StatusCode
 {

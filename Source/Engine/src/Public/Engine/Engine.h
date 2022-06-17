@@ -23,7 +23,7 @@ public:
     [[nodiscard]] FEngineSpecification GetEngineSpecification() const { return m_EngineSpecification; }
 
 private:
-    FStatusCode Initialize() const;
+    [[nodiscard]] FStatusCode Initialize() const;
     void Run();
     [[nodiscard]] FStatusCode Shutdown() const;
     

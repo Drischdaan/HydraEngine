@@ -17,8 +17,7 @@ FStatusCode FEngine::Start(FEngineSpecification specification, std::shared_ptr<F
 FStatusCode FEngine::Initialize() const
 {
     FStatusCode applicationStatus = m_Application->Initialize();
-    if(IS_FAILURE_CODE(applicationStatus))
-        return applicationStatus;
+    RETURN_IF_FAILED(applicationStatus)
     return StatusCode::Ok;
 }
 
@@ -31,8 +30,7 @@ FStatusCode FEngine::Shutdown() const
     if(m_Application != nullptr)
     {
         FStatusCode applicationStatus = m_Application->Shutdown();
-        if(IS_FAILURE_CODE(applicationStatus))
-            return applicationStatus;
+        RETURN_IF_FAILED(applicationStatus)
     }
     return StatusCode::Ok;
 }
