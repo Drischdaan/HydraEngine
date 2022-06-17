@@ -8,7 +8,7 @@ int main()
     appSpecification.Name = "Sandbox";
     appSpecification.Author = "HydraStudio";
     appSpecification.Version = VERSION(1, 0, 0);
-    appSpecification.VersionSuffix = "build";
+    appSpecification.VersionSuffix = "alpha";
     constexpr FEngineSpecification specification;
     return GEngine->Start(specification, std::make_shared<SandboxApplication>(appSpecification)).Code;
 }
