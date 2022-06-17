@@ -4,14 +4,14 @@
 </div>
 
 ### Introduction
-Hydra is a game engine written in C++. It is designed to be support multiple rendering backends, 
+Hydra is a game engine written in C++. It is designed to support multiple rendering backends 
 and is designed to be easy to use.
 
 ### Features
 
 - **Simple**: Easy to use, easy to understand, easy to extend.
 - **Powerful**: Supports multiple rendering backends
-- **Extensible**: Supports multiple game systems, supports multiple game objects, supports multiple game states.
+- **Extensible**: Easy to add new features
 - **Open Source**: Hydra is open source, you can use Hydra in your own projects.
 
 ### Getting Started
