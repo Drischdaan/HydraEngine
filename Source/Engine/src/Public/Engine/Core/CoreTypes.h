@@ -48,3 +48,10 @@ static_assert(sizeof(f64) == 8, "f64 is not 8 bytes");
 #define F32_MAX 3.402823466e+38F
 #define F64_MIN (-1.7976931348623158e+308)
 #define F64_MAX 1.7976931348623158e+308
+
+#define VERSION(major, minor, patch) \
+    ((((u32)(major)) << 22) | (((u32)(minor)) << 12) | ((u32)(patch)))
+
+#define VERSION_MAJOR(version) ((u32)((version) >> 22))
+#define VERSION_MINOR(version) ((u32)((version) >> 12) & 0x3ff)
+#define VERSION_PATCH(version) ((u32)(version) & 0xfff)
