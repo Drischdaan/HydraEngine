@@ -36,4 +36,4 @@ private:
 #define ENGINE_VERSION VERSION(0, 1, 0)
 #define ENGINE_VERSION_SUFFIX "alpha"
 
-static std::shared_ptr<FEngine> GEngine = std::make_shared<FEngine>();
+static FEngine* GEngine = new FEngine();

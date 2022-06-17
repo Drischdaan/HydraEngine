@@ -10,5 +10,7 @@ int main()
     appSpecification.Version = VERSION(1, 0, 0);
     appSpecification.VersionSuffix = "alpha";
     constexpr FEngineSpecification specification;
-    return GEngine->Start(specification, std::make_shared<SandboxApplication>(appSpecification)).Code;
+    const i8 code = GEngine->Start(specification, std::make_shared<SandboxApplication>(appSpecification)).Code;
+    delete GEngine;
+    return code;
 }
