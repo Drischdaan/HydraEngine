@@ -4,7 +4,7 @@
 #include <Engine/Core/CoreDefinitions.h>
 
 #define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_TRACE
-#include "spdlog/spdlog.h"
+#include <spdlog/spdlog.h>
 
 class ENGINE_API FLogManager
 {

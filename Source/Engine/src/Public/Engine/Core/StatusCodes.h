@@ -1,16 +1,15 @@
 ﻿#pragma once
 
 #include <Engine/Core/CoreDefinitions.h>
-#include <Engine/Core/CoreTypes.h>
 
 #include <string>
 
 struct ENGINE_API FStatusCode
 {
-    i8 Code;
+    int Code;
     std::string Message;
 
-    FStatusCode(char code, std::string message)
+    FStatusCode(int code, std::string message)
         : Code(code), Message(std::move(message))
     {
     }
@@ -18,10 +17,6 @@ struct ENGINE_API FStatusCode
 
 #define DEFINE_STATUS_CODE(name, code, message) \
     static const FStatusCode name = FStatusCode(code, message);
-
-#define IS_SUCCESS_CODE(code) ((code).Code >= 0)
-#define IS_FAILURE_CODE(code) ((code).Code < 0)
-#define RETURN_IF_FAILED(code) if (IS_FAILURE_CODE(code)) return code;
 
 namespace StatusCode
 {

@@ -19,6 +19,7 @@ public:
     ~FEngine() = default;
 
     FStatusCode Start(FEngineSpecification specification, std::shared_ptr<FApplication> application);
+    FStatusCode Stop(FStatusCode code) const;
 
     [[nodiscard]] FEngineSpecification GetEngineSpecification() const { return m_EngineSpecification; }
 

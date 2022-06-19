@@ -5,17 +5,23 @@
 
 #include <utility>
 
+#include "Engine/Debug/Assertion.h"
 #include "Engine/Logging/LogManager.h"
 
 FStatusCode FEngine::Start(FEngineSpecification specification, std::shared_ptr<FApplication> application)
 {
     m_EngineSpecification = specification;
     m_Application = std::move(application);
-    const FStatusCode initializationCode = Initialize();
+    FStatusCode initializationCode = Initialize();
     if(IS_FAILURE_CODE(initializationCode))
-        return Shutdown(initializationCode);
+        return initializationCode;
     Run();
-    return Shutdown(initializationCode);
+    return StatusCode::Ok;
+}
+
+FStatusCode FEngine::Stop(FStatusCode code) const
+{
+    return Shutdown(std::move(code));
 }
 
 FStatusCode FEngine::Initialize() const
@@ -23,7 +29,7 @@ FStatusCode FEngine::Initialize() const
     FLogManager::Initialize();
     LOG_INFO("Hydra Engine {}", VERSION_STRING(ENGINE_VERSION, std::string(ENGINE_VERSION_SUFFIX)));
     LOG_DEBUG("Loading application...");
-    FStatusCode applicationStatus = m_Application->Initialize();
+    const FStatusCode applicationStatus = m_Application->Initialize();
     RETURN_IF_FAILED(applicationStatus)
     
     const FApplicationSpecification applicationSpecification = m_Application->GetApplicationSpecification();
