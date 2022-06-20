@@ -11,7 +11,7 @@ std::shared_ptr<spdlog::logger> FLogManager::s_ApplicationLogger = nullptr;
 void FLogManager::Initialize()
 {
     const std::string pattern = "%^[%D %T] [%=10n] %8l:%$ %v";
-    const std::string globalPattern = "%^[%D %T] [%=10n] [%20!s:%-4#] %8l:%$ %v";
+    const std::string globalPattern = "%^[%D %T] [%=10n] [%26!s:%-4#] %8l:%$ %v";
     constexpr spdlog::level::level_enum logLevel = spdlog::level::trace;
     
     std::vector<spdlog::sink_ptr> engineSinks = {

@@ -23,4 +23,9 @@ namespace StatusCode
     DEFINE_STATUS_CODE(Ok, 0, "Ok")
     DEFINE_STATUS_CODE(Error, -1, "Error")
     DEFINE_STATUS_CODE(NotImplemented, -2, "Not implemented")
+    DEFINE_STATUS_CODE(InvalidRenderer, -3, "Invalid renderer")
+    DEFINE_STATUS_CODE(InvalidRendererBackend, -4, "Invalid renderer backend")
+    DEFINE_STATUS_CODE(InvalidVulkanInstance, -100, "Invalid Vulkan instance")
+    DEFINE_STATUS_CODE(InvalidVulkanPhysicalDevice, -101, "Invalid Vulkan physical device")
+    DEFINE_STATUS_CODE(InvalidVulkanDevice, -102, "Invalid Vulkan device")
 }
