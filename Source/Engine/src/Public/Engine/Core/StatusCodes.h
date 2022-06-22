@@ -28,4 +28,7 @@ namespace StatusCode
     DEFINE_STATUS_CODE(InvalidVulkanInstance, -100, "Invalid Vulkan instance")
     DEFINE_STATUS_CODE(InvalidVulkanPhysicalDevice, -101, "Invalid Vulkan physical device")
     DEFINE_STATUS_CODE(InvalidVulkanDevice, -102, "Invalid Vulkan device")
+    DEFINE_STATUS_CODE(RequiredExtensionNotSupported, -103, "Required Vulkan extension not supported")
+    DEFINE_STATUS_CODE(RequiredLayerNotSupported, -104, "Required Vulkan layer not supported")
+    DEFINE_STATUS_CODE(InvalidQueueName, -105, "Invalid queue name")
 }
